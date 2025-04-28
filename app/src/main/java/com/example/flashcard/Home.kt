@@ -60,7 +60,7 @@ fun Home(navController: NavController) {
         )
 
         Button(onClick = {
-            navController.navigate(Routes.Question_screen)
+            navController.navigate("question_screen/${userName.text}")
         }) {
             Text(text = "Start Game")
         }
