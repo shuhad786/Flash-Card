@@ -22,16 +22,16 @@ import androidx.navigation.NavController
 fun QuestionScreen(navController: NavController, userName: String) {
     // Define the questions
     val questions = listOf(
-        "Is the sky blue?",
-        "Is water wet?",
-        "Is fire cold?",
-        "Is the earth flat?",
-        "Is 2 + 2 equal to 4?",
-        "Is the moon made of cheese?"
+        "The sum of the angles in a triangle is always 180 degrees",
+        "The Declaration of Independence was signed in 1776",
+        "'Moby Dick was' written by Mark Twain",
+        "Mount Everest is the tallest mountain in the world",
+        "DNA stands for Deoxyribonucleic Acid",
+        "Humans have 4 lungs"
     )
 
     // Define the correct answers
-    val correctAnswers = listOf(true, true, false, false, true, false)
+    val correctAnswers = listOf(true, true, false, true, true, false)
 
     // State to track the current question index, score, and user answers
     var currentQuestionIndex by remember { mutableStateOf(0) }

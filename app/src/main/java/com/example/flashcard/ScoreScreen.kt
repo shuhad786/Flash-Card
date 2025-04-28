@@ -55,6 +55,27 @@ fun ScoreScreen(navController: NavController, score: Int, userName: String, user
         )
         Spacer(modifier = Modifier.height(25.dp))
 
+        // Determine the message based on the score
+        val message = when (score) {
+            in 0..1 -> "You need to start studying more."
+            in 2..3 -> "You can do better than that."
+            in 4..5 -> "You're almost there, just try a bit harder."
+            6 -> "Excellent! You got everything right!!"
+            else -> "" // Fallback case, should not occur
+        }
+
+        // Display the message
+        Text(
+            text = message,
+            style = TextStyle(
+                color = Color.White,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            ),
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(25.dp))
+
         // Button to navigate to the Review Screen
         Button(onClick = {
             // Pass userName and userAnswers as a comma-separated string
