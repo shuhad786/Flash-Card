@@ -1,5 +1,6 @@
 package com.example.flashcard
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -41,19 +42,21 @@ fun QuestionScreen(navController: NavController, userName: String) {
     val isLastQuestion = currentQuestionIndex >= questions.size - 1
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier =
+            Modifier.fillMaxSize()
+                    .background(Color.Black),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         // Display the current question number
         Text(
-            text = "Question ${currentQuestionIndex + 1}", // Increment question number
+            text = if (isLastQuestion) "Completed" else "Question ${currentQuestionIndex + 1}", // Increment question number
             style = TextStyle(
-                color = Color.White,
+                color = Color.Black,
                 fontSize = 44.sp,
                 fontWeight = FontWeight.Bold,
                 shadow = Shadow(
-                    color = Color.Black,
+                    color = Color(0xFFFF49D6),
                     offset = Offset(0f, 0f),
                     blurRadius = 10f
                 )
@@ -66,7 +69,7 @@ fun QuestionScreen(navController: NavController, userName: String) {
         if (!isLastQuestion) {
             Text(
                 text = questions[currentQuestionIndex],
-                color = Color.Black,
+                color = Color.White,
                 fontSize = 20.sp
             ) // Display the current question
             Spacer(modifier = Modifier.height(16.dp))

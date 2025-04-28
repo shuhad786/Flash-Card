@@ -38,7 +38,7 @@ fun Home(navController: NavController) {
                 shadow = Shadow(
                     color = Color.White, // Glow color
                     offset = Offset(0f, 0f), // No offset
-                    blurRadius = 10f // Adjust blur radius for glow effect
+                    blurRadius = 20f // Adjust blur radius for glow effect
                 )
             ),
             textAlign = TextAlign.Center // Center the text
@@ -61,8 +61,10 @@ fun Home(navController: NavController) {
 
         Button(onClick = {
             navController.navigate("question_screen/${userName.text}")
-        }) {
-            Text(text = "Start Game")
+        },
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF3A275D))
+            ) {
+            Text(text = "Start Game", color = Color.White)
         }
     }
 }
