@@ -22,9 +22,9 @@ import androidx.navigation.NavController
 @Composable
 fun ReviewScreen(navController: NavController, userName: String, userAnswers: List<Boolean>, correctAnswers: List<Boolean>) {
     Column(
-        modifier =
-            Modifier.fillMaxSize()
-                    .background(Color.Black),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -49,33 +49,42 @@ fun ReviewScreen(navController: NavController, userName: String, userAnswers: Li
         val questions = listOf(
             "The sum of the angles in a triangle is always 180 degrees",
             "The Declaration of Independence was signed in 1776",
-            "'Moby Dick was' written by Mark Twain",
+            "'Moby Dick' was written by Mark Twain",
             "Mount Everest is the tallest mountain in the world",
             "DNA stands for Deoxyribonucleic Acid",
             "Humans have 4 lungs"
         )
 
-        for (index in userAnswers.indices) {
-            val questionText = questions[index]
-            val userAnswer = userAnswers[index]
-            val correctAnswer = correctAnswers[index]
+        // Check if userAnswers and correctAnswers have the same length as questions
+        if (userAnswers.size != questions.size || correctAnswers.size != questions.size) {
+            Text(
+                text = "Error: Mismatch in the number of answers.",
+                color = Color.Red,
+                fontSize = 20.sp
+            )
+        } else {
+            for (index in userAnswers.indices) {
+                val questionText = questions[index]
+                val userAnswer = userAnswers[index]
+                val correctAnswer = correctAnswers[index]
 
-            // Determine the background color based on the answer
-            val backgroundColor = if (userAnswer == correctAnswer) Color(0xFF3DDD7F) else Color.Red
+                // Determine the background color based on the answer
+                val backgroundColor = if (userAnswer == correctAnswer) Color(0xFF3DDD7F) else Color.Red
 
-            // Create a bubble effect for the question
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-                    .background(color = backgroundColor, shape = MaterialTheme.shapes.medium) // Rounded corners
-                    .padding(16.dp) // Padding inside the bubble
-            ) {
-                Text(
-                    text = "$questionText - Your answer: ${if (userAnswer == true) "True" else "False"}",
-                    color = Color.White, // White text color
-                    fontSize = 20.sp
-                )
+                // Create a bubble effect for the question
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .background(color = backgroundColor, shape = MaterialTheme.shapes.medium) // Rounded corners
+                        .padding(16.dp) // Padding inside the bubble
+                ) {
+                    Text(
+                        text = "$questionText - Your answer: ${if (userAnswer == true) "True" else "False"}",
+                        color = Color.White, // White text color
+                        fontSize = 16.sp
+                    )
+                }
             }
         }
 
@@ -91,4 +100,5 @@ fun ReviewScreen(navController: NavController, userName: String, userAnswers: Li
         }
     }
 }
+
 
