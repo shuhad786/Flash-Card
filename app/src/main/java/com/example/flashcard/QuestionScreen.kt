@@ -23,21 +23,21 @@ import android.util.Log
 fun QuestionScreen(navController: NavController, userName: String) {
     // Define the questions
     val questions = listOf(
-        "The sum of the angles in a triangle is always 180 degrees",
-        "The Declaration of Independence was signed in 1776",
-        "'Moby Dick' was written by Mark Twain",
-        "Mount Everest is the tallest mountain in the world",
-        "DNA stands for Deoxyribonucleic Acid",
-        "Humans have 4 lungs"
+        "South Africa has three capitals: Pretoria, Cape Town, and Bloemfontein.", // True
+        "Zulu is the most widely spoken language in South Africa.", // True
+        "The official currency of South Africa is the South African Dollar.", // False
+        "Pap is a traditional South African dish made from rice.", // False
+        "Nelson Mandela was the first black president of South Africa and fought against apartheid.", // True
+        "Durban is the largest city in South Africa." // False
     )
 
-    // Define the correct answers
-    val correctAnswers = listOf(true, true, false, true, true, false)
+// Correct answers corresponding to the questions above
+    val correctAnswers = listOf(true, true, false, false, true, false)
 
     // State to track the current question index, score, and user answers
-    var currentQuestionIndex by remember { mutableStateOf(0) }
-    var score by remember { mutableStateOf(0) }
-    val userAnswers = remember { mutableStateListOf<Boolean?>() } // Store user answers
+    var currentQuestionIndex by remember { mutableIntStateOf(0) }
+    var score by remember { mutableIntStateOf(0) }
+    val userAnswers = remember { mutableStateListOf<Boolean>() } // Store user answers
 
     // Check if we have reached the end of the questions
     val isLastQuestion = currentQuestionIndex >= questions.size - 1
@@ -49,7 +49,7 @@ fun QuestionScreen(navController: NavController, userName: String) {
     ) {
         // Display the current question number
         Text(
-            text = if (isLastQuestion) "Completed" else "Question ${currentQuestionIndex + 1}",
+            text = if (isLastQuestion) "Question 6" else "Question ${currentQuestionIndex + 1}",
             style = TextStyle(
                 color = Color.Black,
                 fontSize = 44.sp,
@@ -77,7 +77,9 @@ fun QuestionScreen(navController: NavController, userName: String) {
             Button(onClick = {
                 userAnswers.add(true) // Store the user's answer
                 Log.d("QuizApp", "Question ${currentQuestionIndex + 1}: User answered True") // Log the answer
-                if (correctAnswers[currentQuestionIndex]) score += 1 // Increment score if correct
+                if (correctAnswers[currentQuestionIndex]) {
+                    score += 1 // Increment score if correct
+                }
                 currentQuestionIndex += 1 // Move to the next question
             },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00A89A))
@@ -85,19 +87,20 @@ fun QuestionScreen(navController: NavController, userName: String) {
                 Text(text = "True", color = Color.White)
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
-
             // False button
             Button(onClick = {
                 userAnswers.add(false) // Store the user's answer
                 Log.d("QuizApp", "Question ${currentQuestionIndex + 1}: User answered False") // Log the answer
-                if (!correctAnswers[currentQuestionIndex]) score += 1 // Increment score if correct
+                if (!correctAnswers[currentQuestionIndex]) {
+                    score += 1 // Increment score if correct
+                }
                 currentQuestionIndex += 1 // Move to the next question
             },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9D56FF))
             ) {
-                Text(text = "False", color = Color.White) // Corrected button text
+                Text(text = "False", color = Color.White)
             }
+
         } else {
             // Only show the score button after the last question
             Text(
@@ -109,31 +112,38 @@ fun QuestionScreen(navController: NavController, userName: String) {
 
             // Last question buttons
             Button(onClick = {
-                userAnswers.add(true) // Assume user answered True for the last question
+                userAnswers.add(true) // Store the user's answer
                 Log.d("QuizApp", "Question ${currentQuestionIndex + 1}: User answered True") // Log the answer
-                if (correctAnswers[currentQuestionIndex]) score += 1 // Increment score if correct
-                navController.navigate("score_screen/$score/$userName/${userAnswers.joinToString(",")}")
-            },
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00A89A))
-            ) {
+                Log.d("QuizApp", "Correct Answer: ${correctAnswers[currentQuestionIndex]}") // Log the correct answer
+                if (correctAnswers[currentQuestionIndex]) {
+                    score += 1 // Increment score if correct
+                }
+                currentQuestionIndex += 1 // Move to the next question
+            }) {
                 Text(text = "True", color = Color.White)
             }
+
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(onClick = {
                 userAnswers.add(false) // Assume user answered False for the last question
                 Log.d("QuizApp", "Question ${currentQuestionIndex + 1}: User answered False") // Log the answer
-                if (!correctAnswers[currentQuestionIndex]) score += 1 // Increment score if correct
+                if (!correctAnswers[currentQuestionIndex]) {
+                    score += 1 // Increment score if correct
+                    Log.d("QuizApp", "Score incremented for Question ${currentQuestionIndex + 1}")
+                    Log.d("QuizApp", "Correct Answers: $correctAnswers")
+                }
                 navController.navigate("score_screen/$score/$userName/${userAnswers.joinToString(",")}")
             },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9D56FF))
             ) {
-                Text(text = "False", color = Color.White) // Corrected button text
+                Text(text = "False", color = Color.White)
             }
         }
     }
 }
+
 
 
 

@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import android.util.Log
 
 @Composable
 fun ReviewScreen(navController: NavController, userName: String, userAnswers: List<Boolean>, correctAnswers: List<Boolean>) {
@@ -47,12 +48,12 @@ fun ReviewScreen(navController: NavController, userName: String, userAnswers: Li
 
         // Display each question and the user's answer
         val questions = listOf(
-            "The sum of the angles in a triangle is always 180 degrees",
-            "The Declaration of Independence was signed in 1776",
-            "'Moby Dick' was written by Mark Twain",
-            "Mount Everest is the tallest mountain in the world",
-            "DNA stands for Deoxyribonucleic Acid",
-            "Humans have 4 lungs"
+            "South Africa has three capitals: Pretoria, Cape Town, and Bloemfontein.", // True
+            "Zulu is the most widely spoken language in South Africa.", // True
+            "The official currency of South Africa is the South African Dollar.", // False
+            "Pap is a traditional South African dish made from rice.", // False
+            "Nelson Mandela was the first black president of South Africa and fought against apartheid.", // True
+            "Durban is the largest city in South Africa." // False
         )
 
         // Check if userAnswers and correctAnswers have the same length as questions
@@ -68,6 +69,10 @@ fun ReviewScreen(navController: NavController, userName: String, userAnswers: Li
                 val userAnswer = userAnswers[index]
                 val correctAnswer = correctAnswers[index]
 
+                // Log the index and values for debugging
+                Log.d("QuizApp", "Index: $index, User Answer: $userAnswer")
+                Log.d("QuizApp", "Index: $index, Correct Answer: $correctAnswer")
+
                 // Determine the background color based on the answer
                 val backgroundColor = if (userAnswer == correctAnswer) Color(0xFF3DDD7F) else Color.Red
 
@@ -80,7 +85,7 @@ fun ReviewScreen(navController: NavController, userName: String, userAnswers: Li
                         .padding(16.dp) // Padding inside the bubble
                 ) {
                     Text(
-                        text = "$questionText - Your answer: ${if (userAnswer == true) "True" else "False"}",
+                        text = "$questionText - Your answer: ${if (userAnswer) "True" else "False"}",
                         color = Color.White, // White text color
                         fontSize = 16.sp
                     )
@@ -100,5 +105,6 @@ fun ReviewScreen(navController: NavController, userName: String, userAnswers: Li
         }
     }
 }
+
 
 
