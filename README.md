@@ -53,15 +53,25 @@ After you're finished please remove all the comments and instructions!
 
 **[Flash-Card]** A Kotlin based app called "Flash Card Game" to help the user when studying by asking questions "True" or "False" and the user needs to answer, then they receive a score and can review the questions they have answered both correctly and incorrectly..
 
-![img_5.png](img_5.png) Icon Launcher
+**[Icon Launcher]**
 
-![img.png](img.png) home Screen
+![Icon Launcher.png](img_5.png) 
 
-![img_1.png](img_1.png) Question Screen example
+**[Home Screen]**
 
-![img_2.png](img_2.png) Score Screen
+![Home Screen.png](img.png) 
 
-![img_4.png](img_4.png) Review Screen
+**[Question Screen example]**
+
+![Question Screen example.png](img_1.png) 
+
+**[Score Screen]**
+
+![Score Screen.png](img_2.png) 
+
+**[Review Screen]**
+
+![Review Screen.png](img_4.png) 
 
 ## 🛠 Built With <a name="built-with">Android studio and BlueStack 5</a>
 
